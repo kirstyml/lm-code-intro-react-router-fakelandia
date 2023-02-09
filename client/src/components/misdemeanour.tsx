@@ -1,1 +1,1 @@
-export const Misdemeanour : React.FC = () => <>Misdemeanour!</>;
+export const Misdemeanours : React.FC = () => <>Misdemeanours!</>;
