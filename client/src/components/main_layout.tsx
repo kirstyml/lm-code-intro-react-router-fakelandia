@@ -1,12 +1,16 @@
 import { Header } from "./header";
-import { Outlet } from "react-router-dom"
+import { Footer } from "./footer";
+import { Outlet } from "react-router-dom";
 
 const MainLayout: React.FC = () => {
     return (
-        <main>
+        <>
             <Header />
-            <Outlet />
-        </main>
+            <main>
+                <Outlet />
+            </main>
+            <Footer />
+        </>
     )
 }
 
