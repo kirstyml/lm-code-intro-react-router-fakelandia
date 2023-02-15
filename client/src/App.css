@@ -86,6 +86,10 @@ main {
   grid-column-start: 3;
 }
 
+.misdemeanour__punishment {
+  grid-column-start: 5;
+}
+
 .misdemeanour_container--headings {
   font-weight: bold;
 }

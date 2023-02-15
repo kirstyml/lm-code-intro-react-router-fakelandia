@@ -1,7 +1,8 @@
 import { Misdemeanour } from '../types/misdemeanours.types';
+import { Punishment } from '../types/punishment.types';
 import { MisdemeanourItem } from './misdemeanour';
 
-export const MisdemeanoursContainer : React.FC<{misdemeanours: Misdemeanour[]}> = ({ misdemeanours }) => {
+export const MisdemeanoursContainer : React.FC<{misdemeanours: Misdemeanour[], punishments: Punishment[]}> = ({ misdemeanours, punishments }) => {
     return (
         <>
             <div className="misdemeanour_container">
@@ -9,9 +10,10 @@ export const MisdemeanoursContainer : React.FC<{misdemeanours: Misdemeanour[]}> 
                     <p className="misdemeanour__id">Citizen ID</p>
                     <p className="misdemeanour__date">Date</p>
                     <p className="misdemeanour__misdemeanour">Misdemeanour</p>
+                    <p className="misdemeanour__punishment">Punishment Idea</p>
                 </div>
                 {
-                    misdemeanours.map((item) => <MisdemeanourItem misdemeanour={item} />)
+                    misdemeanours.map((item, index) => <MisdemeanourItem misdemeanour={item} punishment={punishments[index]} />)
                 }
             </div>
         </>
