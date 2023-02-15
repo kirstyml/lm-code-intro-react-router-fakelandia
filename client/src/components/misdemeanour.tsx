@@ -1,22 +1,11 @@
-import { useMisdemeanours } from './misdemeanour_provider';
+import { Misdemeanour } from "../types/misdemeanours.types"
 
-export const Misdemeanours : React.FC = () => {
-    const misdemeanours = useMisdemeanours();
-
-    return (
-        <>
-        {
-            misdemeanours.map((misdemeanour) => {
-                return(
-                    // Refactor misdemeanour into component
-                    <div>
-                        <p>{misdemeanour.citizenId}</p>
-                        <p>{misdemeanour.misdemeanour}</p>
-                        <p>{misdemeanour.date}</p>
-                    </div>
-                )
-            })
-        }
-        </>
+export const MisdemeanourItem : React.FC<{ misdemeanour: Misdemeanour}> = ({ misdemeanour }) => {
+    return(
+        <div>
+            <p>{misdemeanour.citizenId}</p>
+            <p>{misdemeanour.misdemeanour}</p>
+            <p>{misdemeanour.date}</p>
+        </div>
     )
 }
