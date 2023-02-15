@@ -1,20 +1,7 @@
-import { useState, useEffect } from 'react';
-import { Misdemeanour } from '../types/misdemeanours.types';
+import { useMisdemeanours } from './misdemeanour_provider';
 
 export const Misdemeanours : React.FC = () => {
-    const [misdemeanours, setMisdemeanours] = useState<Misdemeanour[]>([]);
-
-    useEffect(() => {
-        getMisdemeanours();
-    }, []);
-
-    const getMisdemeanours = async () => {
-        // TODO: decide how amount is specified
-        const amount = 2;
-        const response = await fetch(`http://localhost:8080/api/misdemeanours/${amount}`);
-        const responseJSON = await response.json();
-        setMisdemeanours(responseJSON.misdemeanours);
-    };
+    const misdemeanours = useMisdemeanours();
 
     return (
         <>
