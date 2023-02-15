@@ -1,17 +1,17 @@
-import { useState } from 'react';
 import { BrowserRouter } from "react-router-dom";
-import SiteRouter from "./router"
+import SiteRouter from "./router";
+import { MisdemeanoursProvider } from "./components/misdemeanour_provider";
 
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <BrowserRouter>
-        <SiteRouter />
-      </BrowserRouter>
+      <MisdemeanoursProvider>
+        <BrowserRouter>
+          <SiteRouter />
+        </BrowserRouter>
+      </MisdemeanoursProvider>
     </>
   )
 }
