@@ -10,7 +10,7 @@ export const ReasonsSelect : React.FC<IReasonsSelect> = ({ handleChange }) => {
         <>
             <label htmlFor="reason">Reason for contact</label>
             <select name="reason" id="reason" onChange={handleChange}>
-                {reasons.map(reason => <option value={reason}>{reason === "" ? "--Please select an option--" : reason === "talk" ? "I just want to talk" : reason}</option>)}
+                {reasons.map(reason => <option value={reason}>{reason === "" ? "--Please select an option--" : reason === "just-talk" ? "I just want to talk" : reason}</option>)}
             </select>
         </>
     )
