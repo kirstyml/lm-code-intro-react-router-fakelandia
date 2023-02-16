@@ -1,6 +1,24 @@
-import { MISDEMEANOURS } from "../types/misdemeanours.types"
+import React, { useState } from "react";
+import { reasons, reasonOptions } from "../types/reasons.types";
+import { ReasonsSelect } from "./reasonsSelect";
 
 export const Confession : React.FC = () => {
+    const [subject, setSubject] = useState("");
+    const [reason, setReason] = useState<reasonOptions>("");
+    const [details, setDetails] = useState("");
+
+    const allValid = subject !== "" && reason !== "" && details.length > 10;
+
+    const isReason = (input: string) : input is reasonOptions => {
+        return reasons.includes(input as reasonOptions);
+    }
+
+    const handleReasonChange = (event : React.ChangeEvent<HTMLSelectElement>) => {
+        if (isReason(event.target.value)) {
+            setReason(event.target.value);
+        }
+    }
+
     return (
         <div>
             <p>It's very difficult to catch people committing misdemeanours 
@@ -9,15 +27,10 @@ export const Confession : React.FC = () => {
                 you're welcome to contact us here too. Up to ypu!</p>
             <form action="">
                 <label htmlFor="subject">Subject</label>
-                <input name="subject" type="text" />
-                <label htmlFor="reason">Reason for contact</label>
-                <select name="reason" id="reason">
-                <option value="">--Please select an option--</option>
-                    {MISDEMEANOURS.map(m => <option value={m}>{m}</option>)}
-                    <option value="I just want to talk">I just want to talk</option>
-                </select>
-                <textarea name="" id="" cols={30} rows={10}></textarea>
-                <input type="submit" value="Confess" />
+                <input name="subject" type="text" onChange={(event) => setSubject(event.target.value)} />
+                <ReasonsSelect handleChange={handleReasonChange} />
+                <textarea name="details" id="" cols={30} rows={10} onChange={(event) => setDetails(event.target.value)}></textarea>
+                <input type="submit" value="Confess" disabled={!allValid} />
             </form>
         </div>
     )
