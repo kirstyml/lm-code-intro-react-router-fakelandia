@@ -1,7 +1,11 @@
 import React from "react";
 import { reasons, reasonOptions } from "../types/reasons.types";
 
-export const ReasonsSelect : React.FC<{handleChange: (event : React.ChangeEvent<HTMLSelectElement>) => void}> = ({ handleChange }) => {
+interface IReasonsSelect {
+    handleChange : (event : React.ChangeEvent<HTMLSelectElement>) => void;
+}
+
+export const ReasonsSelect : React.FC<IReasonsSelect> = ({ handleChange }) => {
     return (
         <>
             <label htmlFor="reason">Reason for contact</label>
