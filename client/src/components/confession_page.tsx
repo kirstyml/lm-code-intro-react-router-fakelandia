@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ConfessionResponse } from "../types/confession.types";
 import { reasons, reasonOptions } from "../types/reasons.types";
-import { useAddMisdemeanour } from "./misdemeanour_provider";
+import { useAddMisdemeanour } from "../context/misdemeanour_provider";
 import { ReasonsSelect } from "./reasonsSelect";
 import { SubjectInput } from "./subjectInput";
 
