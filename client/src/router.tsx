@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { Confession } from "./components/confession_page";
-import { Home } from "./components/home_page";
+import { Home } from "./pages/home_page";
 import MainLayout from "./components/main_layout";
 import { Misdemeanours } from "./components/misdemeanours_page";
 import { NotFound } from "./components/not_found";
