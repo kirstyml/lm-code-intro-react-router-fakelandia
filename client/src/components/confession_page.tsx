@@ -39,14 +39,20 @@ export const Confession : React.FC = () => {
         event.preventDefault();
         //validate entries ? or no need as submit button disabled until then?
         // fetch call to send the data
+        const body = JSON.stringify({
+            subject: subject,
+            reason: reason,
+            details: details,
+          });
+        console.log(`body: ${body}`)
         try {
             const response = await fetch(`http://localhost:8080/api/confess`, {
                 method: "POST",
-                body: JSON.stringify({
-                  subject: subject,
-                  reason: reason,
-                  details: details,
-                }),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                  },
+                body: body,
               }); 
             const responseJSON = await response.json();
             // should response.JSON have a type?
