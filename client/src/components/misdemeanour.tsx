@@ -7,7 +7,7 @@ export const MisdemeanourItem : React.FC<{ misdemeanour: Misdemeanour, punishmen
             <p className="misdemeanour__id">{misdemeanour.citizenId}</p>
             <p className="misdemeanour__date">{misdemeanour.date}</p>
             <p className="misdemeanour__misdemeanour">{misdemeanour.misdemeanour}</p>
-            <img className="misdemeanour__punishment" src={`https://picsum.photos/id/${punishment.id}/100`} />      
+            <img className="misdemeanour__punishment" src={`https://picsum.photos/id/${punishment.id}/100`} alt="punishment idea" />      
         </div>
     )
 }
