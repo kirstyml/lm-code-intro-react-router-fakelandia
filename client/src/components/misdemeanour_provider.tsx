@@ -1,14 +1,23 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Misdemeanour } from '../types/misdemeanours.types';
+import { Misdemeanour, MisdemeanourKind, YourId } from '../types/misdemeanours.types';
 import { Punishment } from '../types/punishment.types';
 
+interface IMisdemeanoursContext {
+    misdemeanours: Misdemeanour[],
+    punishments: Punishment[],
+    addMisdemeanour: (misdemeanour: MisdemeanourKind) => void
+}
 
-
-const MisdemeanoursContext = React.createContext<{ misdemeanours: Misdemeanour[], punishments: Punishment[]}>({ misdemeanours: [], punishments: []});
+const MisdemeanoursContext = React.createContext<IMisdemeanoursContext>({ misdemeanours: [], punishments: [], addMisdemeanour: () => {}});
 
 export const useMisdemeanours = () => {
     const { misdemeanours } = useContext(MisdemeanoursContext);
     return misdemeanours;
+}
+
+export const useAddMisdemeanour = () => {
+    const { addMisdemeanour } = useContext(MisdemeanoursContext);
+    return addMisdemeanour;
 }
 
 export const usePunishments = () => {
@@ -34,6 +43,16 @@ export const MisdemeanoursProvider: React.FC<{children?: React.ReactNode}> = ({c
         setMisdemeanours(responseJSON.misdemeanours);
     };
 
+    const addMisdemeanour = (misdemeanour : MisdemeanourKind) => {
+        const newMisdemeanour =  {
+            citizenId: 'YOU!' as YourId,
+            misdemeanour: misdemeanour,
+            date: new Date().toLocaleDateString()
+        }
+        console.log(newMisdemeanour);
+        setMisdemeanours([...misdemeanours, newMisdemeanour]);
+    }
+
     const getPunishments = async (amount : number) => {
         const response = await fetch(`https://picsum.photos/v2/list?page=1&limit=${amount}`);
         const responseJSON = await response.json();
@@ -41,7 +60,7 @@ export const MisdemeanoursProvider: React.FC<{children?: React.ReactNode}> = ({c
     };
 
     return(
-        <MisdemeanoursContext.Provider value={{ misdemeanours, punishments }}>
+        <MisdemeanoursContext.Provider value={{ misdemeanours, punishments, addMisdemeanour }}>
             {children}
         </MisdemeanoursContext.Provider>
     )

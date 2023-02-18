@@ -13,7 +13,7 @@ export const MisdemeanoursContainer : React.FC<{misdemeanours: Misdemeanour[], p
                     <p className="misdemeanour__punishment">Punishment Idea</p>
                 </div>
                 {
-                    misdemeanours.map((item, index) => <MisdemeanourItem misdemeanour={item} punishment={punishments[index]} />)
+                    misdemeanours.map((item, index) => <MisdemeanourItem misdemeanour={item} punishment={punishments.length - index > 0 ? punishments[index] : punishments[0]} />)
                 }
             </div>
         </>

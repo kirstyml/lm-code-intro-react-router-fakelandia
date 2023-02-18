@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { ConfessionResponse } from "../types/confession.types";
 import { reasons, reasonOptions } from "../types/reasons.types";
+import { useAddMisdemeanour } from "./misdemeanour_provider";
 import { ReasonsSelect } from "./reasonsSelect";
 import { SubjectInput } from "./subjectInput";
 
@@ -9,6 +11,7 @@ export const Confession : React.FC = () => {
     const [details, setDetails] = useState("");
     const [errors, setErrors] = useState({subject: false, reason: false, details: false});
     const [submitError, setSubmitError] = useState<string | undefined>(undefined);
+    const updateMisdemeanours = useAddMisdemeanour();
 
 
     const subjectValid = subject !== "";
@@ -44,7 +47,6 @@ export const Confession : React.FC = () => {
             reason: reason,
             details: details,
           });
-        console.log(`body: ${body}`)
         try {
             const response = await fetch(`http://localhost:8080/api/confess`, {
                 method: "POST",
@@ -54,16 +56,16 @@ export const Confession : React.FC = () => {
                   },
                 body: body,
               }); 
-            const responseJSON = await response.json();
-            // should response.JSON have a type?
+            const responseJSON = await response.json() as ConfessionResponse;
             console.log(responseJSON);
             // failure - show error message
-            if (!responseJSON.success) {
-                setSubmitError(responseJSON.message);
-            } else {
-                if (responseJSON.justTalked) {
+            if (responseJSON.success) {
+                if (!responseJSON.justTalked && reason !== 'just-talk' && reason !== "") {
                     //add the misdemeanour to the state
+                    updateMisdemeanours(reason);
                 }
+            } else {
+                setSubmitError(responseJSON.message);
             }
         } catch (error) {
             console.log(error);
