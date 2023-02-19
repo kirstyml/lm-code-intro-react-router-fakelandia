@@ -3,7 +3,7 @@ import { Misdemeanour, MisdemeanourKind, YourId } from '../types/misdemeanours.t
 import { Punishment } from '../types/punishment.types';
 
 interface IMisdemeanoursContext {
-    misdemeanours: Misdemeanour[],
+    misdemeanours: Misdemeanour[] | undefined,
     punishments: Punishment[],
     addMisdemeanour: (misdemeanour: MisdemeanourKind) => void
 }
@@ -26,7 +26,7 @@ export const usePunishments = () => {
 }
 
 export const MisdemeanoursProvider: React.FC<{children?: React.ReactNode}> = ({children}) => {
-    const [misdemeanours, setMisdemeanours] = useState<Misdemeanour[]>([]);
+    const [misdemeanours, setMisdemeanours] = useState<Misdemeanour[] | undefined>([]);
     const [punishments, setPunishments] = useState<Punishment[]>([]);
 
     // TODO: decide how amount is specified
@@ -38,9 +38,20 @@ export const MisdemeanoursProvider: React.FC<{children?: React.ReactNode}> = ({c
     }, []);
 
     const getMisdemeanours = async (amount : number) => {
-        const response = await fetch(`http://localhost:8080/api/misdemeanours/${amount}`);
-        const responseJSON = await response.json();
-        setMisdemeanours(responseJSON.misdemeanours);
+        try {
+            const response = await fetch(`http://localhost:8080/api/misdemeanours/${amount}`);
+            if(response.status === 200 || response.status === 201) {
+                const responseJSON = await response.json();
+                setMisdemeanours(responseJSON.misdemeanours);
+            } else {
+                console.log(response);
+                setMisdemeanours(undefined);
+            }
+        }
+        catch (error) {
+            console.log(error);
+            setMisdemeanours(undefined);
+        }
     };
 
     const addMisdemeanour = (misdemeanour : MisdemeanourKind) => {
@@ -50,13 +61,20 @@ export const MisdemeanoursProvider: React.FC<{children?: React.ReactNode}> = ({c
             date: new Date().toLocaleDateString()
         }
         console.log(newMisdemeanour);
-        setMisdemeanours([...misdemeanours, newMisdemeanour]);
+        misdemeanours && setMisdemeanours([...misdemeanours, newMisdemeanour]);
     }
 
     const getPunishments = async (amount : number) => {
-        const response = await fetch(`https://picsum.photos/v2/list?page=1&limit=${amount}`);
-        const responseJSON = await response.json();
-        setPunishments(responseJSON);
+        try {
+            const response = await fetch(`https://picsum.photos/v2/list?page=1&limit=${amount}`);
+            if(response.status === 200 || response.status === 201) {
+                const responseJSON = await response.json();
+                setPunishments(responseJSON);
+            } 
+        }
+        catch (error) {
+            console.log(error);
+        }
     };
 
     return(

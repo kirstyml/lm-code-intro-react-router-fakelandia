@@ -68,4 +68,26 @@ test('loads and display the punishment ideas', async () => {
     render(<MisdemeanoursProvider><Misdemeanours /></MisdemeanoursProvider>);
     await waitFor(() => screen.findByText("vegetables"));
     expect(screen.getAllByAltText('punishment idea')[0]).toHaveAttribute('src', 'https://picsum.photos/id/0/100');
-})
+});
+
+test('handles 500 error for misdemeanours', async () => {
+    server.use(
+      rest.get('http://localhost:8080/api/misdemeanours/10', (req, res, ctx) => {
+        return res(ctx.status(500))
+      }),
+    )
+    render(<MisdemeanoursProvider><Misdemeanours /></MisdemeanoursProvider>);
+    await waitFor(() => screen.findByText(/error/i));
+    expect(screen.getByText(/Error: Something went wrong/i)).toBeInTheDocument();
+  });
+
+  test('handles 500 error for punishments when misdemeanours are present', async () => {
+    server.use(
+      rest.get('https://picsum.photos/v2/list', (req, res, ctx) => {
+        return res(ctx.status(500))
+      }),
+    )
+    render(<MisdemeanoursProvider><Misdemeanours /></MisdemeanoursProvider>);
+    await waitFor(() => screen.findByText("vegetables"));
+    expect(screen.getAllByText("?")[0]).toBeInTheDocument();
+  });
