@@ -36,7 +36,7 @@ export const Confession: React.FC = () => {
         event.target.value.length < 20 ? setInputErrors({ ...inputErrors, details: true }) : setInputErrors({ ...inputErrors, details: false });
     }
 
-    const allValid = !inputErrors.subject && !inputErrors.reason && !inputErrors.details;
+    const allValid = subject && reason && details.length > 20;
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -57,7 +57,7 @@ export const Confession: React.FC = () => {
                 });
                 const responseJSON = await response.json() as ConfessionResponse;
                 if (responseJSON.success) {
-                    if (!responseJSON.justTalked && reason !== 'just-talk' && reason !== "") {
+                    if (!responseJSON.justTalked && reason !== 'just-talk') {
                         updateMisdemeanours(reason);
                     }
                 } else {
