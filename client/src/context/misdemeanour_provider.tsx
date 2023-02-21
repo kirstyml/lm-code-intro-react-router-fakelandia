@@ -8,7 +8,7 @@ interface IMisdemeanoursContext {
     addMisdemeanour: (misdemeanour: MisdemeanourKind) => void
 }
 
-const MisdemeanoursContext = React.createContext<IMisdemeanoursContext>({ misdemeanours: [], punishments: [], addMisdemeanour: () => {}});
+export const MisdemeanoursContext = React.createContext<IMisdemeanoursContext>({ misdemeanours: [], punishments: [], addMisdemeanour: () => {}});
 
 export const useMisdemeanours = () => {
     const { misdemeanours } = useContext(MisdemeanoursContext);
