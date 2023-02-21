@@ -5,10 +5,11 @@ import { Punishment } from '../types/punishment.types';
 interface IMisdemeanoursContext {
     misdemeanours: Misdemeanour[] | undefined,
     punishments: Punishment[],
-    addMisdemeanour: (misdemeanour: MisdemeanourKind) => void
+    addMisdemeanour: (misdemeanour: MisdemeanourKind) => void,
+    misdemeanoursLoading: boolean
 }
 
-export const MisdemeanoursContext = React.createContext<IMisdemeanoursContext>({ misdemeanours: [], punishments: [], addMisdemeanour: () => {}});
+export const MisdemeanoursContext = React.createContext<IMisdemeanoursContext>({ misdemeanours: [], punishments: [], addMisdemeanour: () => {}, misdemeanoursLoading: true});
 
 export const useMisdemeanours = () => {
     const { misdemeanours } = useContext(MisdemeanoursContext);
@@ -25,9 +26,15 @@ export const usePunishments = () => {
     return punishments;
 }
 
+export const useMisdemeanoursLoading = () => {
+    const { misdemeanoursLoading } = useContext(MisdemeanoursContext);
+    return misdemeanoursLoading;
+}
+
 export const MisdemeanoursProvider: React.FC<{children?: React.ReactNode}> = ({children}) => {
     const [misdemeanours, setMisdemeanours] = useState<Misdemeanour[] | undefined>([]);
     const [punishments, setPunishments] = useState<Punishment[]>([]);
+    const [misdemeanoursLoading, setMisdemeanoursLoading] = useState<boolean>(true);
 
     // TODO: decide how amount is specified
     const amount = 10;
@@ -43,14 +50,17 @@ export const MisdemeanoursProvider: React.FC<{children?: React.ReactNode}> = ({c
             if(response.status === 200 || response.status === 201) {
                 const responseJSON = await response.json();
                 setMisdemeanours(responseJSON.misdemeanours);
+                setMisdemeanoursLoading(false);
             } else {
                 console.log(response);
                 setMisdemeanours(undefined);
+                setMisdemeanoursLoading(false);
             }
         }
         catch (error) {
             console.log(error);
             setMisdemeanours(undefined);
+            setMisdemeanoursLoading(false);
         }
     };
 
@@ -78,7 +88,7 @@ export const MisdemeanoursProvider: React.FC<{children?: React.ReactNode}> = ({c
     };
 
     return(
-        <MisdemeanoursContext.Provider value={{ misdemeanours, punishments, addMisdemeanour }}>
+        <MisdemeanoursContext.Provider value={{ misdemeanours, punishments, addMisdemeanour, misdemeanoursLoading }}>
             {children}
         </MisdemeanoursContext.Provider>
     )
