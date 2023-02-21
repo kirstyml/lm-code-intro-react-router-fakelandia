@@ -15,6 +15,12 @@ export const Confession: React.FC = () => {
 
     const updateMisdemeanours = useAddMisdemeanour();
 
+    const resetForm = () => {
+        setSubject("");
+        setReason("");
+        setDetails("");
+    }
+
     const isReason = (input: string): input is reasonOptions => {
         return reasons.includes(input as reasonOptions);
     }
@@ -49,16 +55,21 @@ export const Confession: React.FC = () => {
             try {
                 const response = await fetch(`http://localhost:8080/api/confess`, {
                     method: "POST",
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
+                    // headers: {
+                    //     'Accept': 'application/json',
+                    //     'Content-Type': 'application/json'
+                    // },
                     body: body,
                 });
                 const responseJSON = await response.json() as ConfessionResponse;
                 if (responseJSON.success) {
                     if (!responseJSON.justTalked && reason !== 'just-talk') {
                         updateMisdemeanours(reason);
+                        alert("Your confession has been received.");
+                        resetForm();
+                    } else {
+                        alert("Thanks for chatting - hope you feel better!");
+                        resetForm();
                     }
                 } else {
                     setSubmitError(responseJSON.message);

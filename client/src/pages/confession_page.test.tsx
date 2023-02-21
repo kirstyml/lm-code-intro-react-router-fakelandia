@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Confession } from './confession_page';
 import { rest } from 'msw';
@@ -82,5 +82,53 @@ test('Given the page has rendered, when the user enters invalid details, then an
     expect(errorMessageNext).toBeInTheDocument();
 });
 
+test('given the user has entered valid inputs, when the user presses submit, the confession information is posted to the endpoint', async () => {
+    const server = setupServer();
+    server.use(
+      rest.post('http://localhost:8080/api/confess', (req, res, ctx) => {
+        return res(ctx.json({
+            success: true,
+            justTalked: false,
+            message: "Confession received."
+        }))
+      }),
+    );
+    window.alert = jest.fn();
+    render(<Confession />);
+    const input = screen.getAllByRole('textbox')[0];
+    await userEvent.type(input, "Title");
+    const select = screen.getByRole('combobox');
+    await userEvent.selectOptions(select, ['vegetables']);
+    const textArea = screen.getAllByRole('textbox')[1];
+    await userEvent.type(textArea, "Details that are more than 20 characters long");
+    const submitButton = screen.getByRole('button') as HTMLButtonElement;
+    await userEvent.click(submitButton);
+    await waitFor(window.alert);
+    expect(window.alert).toHaveBeenCalledTimes(1);
+  });
+
+  test('given the user has entered valid inputs and submitted the form, when the endpoint returns a failure, the error message returned is displayed', async () => {
+    const server = setupServer();
+    server.use(
+      rest.post('http://localhost:8080/api/confess', (req, res, ctx) => {
+        return res(ctx.json({
+            success: false,
+            message: "Invalid confession."
+        }))
+      }),
+    );
+    window.alert = jest.fn();
+    render(<Confession />);
+    const input = screen.getAllByRole('textbox')[0];
+    await userEvent.type(input, "Title");
+    const select = screen.getByRole('combobox');
+    await userEvent.selectOptions(select, ['vegetables']);
+    const textArea = screen.getAllByRole('textbox')[1];
+    await userEvent.type(textArea, "Details that are more than 20 characters long");
+    const submitButton = screen.getByRole('button') as HTMLButtonElement;
+    await userEvent.click(submitButton);
+    await waitFor(() => screen.findByText(/error/i));
+    expect(screen.getByText(/Details: Invalid Confession/i)).toBeInTheDocument();
+  });
 
 
