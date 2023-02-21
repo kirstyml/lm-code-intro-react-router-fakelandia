@@ -7,7 +7,7 @@ export const SubjectInput : React.FC<ISubjectInput> = ({ inputValue, handleChang
     return (
         <>
             <label htmlFor="subject">Subject</label>
-            <input name="subject" type="text" onChange={handleChange} value={inputValue} />
+            <input name="subject" id="subject" type="text" onChange={handleChange} value={inputValue} />
         </>
     )
 }

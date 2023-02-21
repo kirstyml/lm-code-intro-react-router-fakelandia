@@ -7,6 +7,6 @@ interface IDetailsTextArea {
 
 export const DetailsTextArea : React.FC<IDetailsTextArea> = ({ detailsText, handleChange }) => {
     return (
-        <textarea name="details" id="" cols={30} rows={10} onChange={(event) => handleChange(event)} value={detailsText}></textarea>
+        <textarea name="details" id="details" cols={30} rows={10} onChange={(event) => handleChange(event)} value={detailsText}></textarea>
     )
 }

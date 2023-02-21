@@ -85,7 +85,7 @@ export const Confession: React.FC = () => {
     }
 
     return (
-        <section>
+        <div>
             <p>It's very difficult to catch people committing misdemeanours
                 so we appreciate it when citizens confess to us directly.</p>
             <p>However, if you're just having a hard day and need to vent then
@@ -96,10 +96,10 @@ export const Confession: React.FC = () => {
                 <ReasonsSelect selectedReason={reason} handleChange={handleReasonChange} />
                 {inputErrors.reason && <p>Error: You must select a reason from the dropdown</p>}
                 <DetailsTextArea detailsText={details} handleChange={handleDetailsChange} />
-                {inputErrors.details && <p>Error: You must enter at least 20 characters in the details section</p>}
+                {inputErrors.details && <p>Error: You must enter at least 20 characters in the details sdiv</p>}
                 <input type="submit" value="Confess" disabled={!allValid} />
                 {submitError && <p>Error: The confession has not been submitted. Details: {submitError} </p>}
             </form>
-        </section>
+        </div>
     )
 }

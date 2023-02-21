@@ -6,9 +6,9 @@ export const Misdemeanours : React.FC = () => {
     const punishments = usePunishments();
 
     return (
-        <section>
+        <div>
             {misdemeanours && <MisdemeanoursContainer misdemeanours={misdemeanours} punishments={punishments} />}
             {!misdemeanours && <p>Error: Something went wrong loading the data. Please check your connection and reload the app</p>}
-        </section>
+        </div>
     )
 }
