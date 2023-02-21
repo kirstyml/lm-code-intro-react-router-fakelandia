@@ -55,10 +55,10 @@ export const Confession: React.FC = () => {
             try {
                 const response = await fetch(`http://localhost:8080/api/confess`, {
                     method: "POST",
-                    // headers: {
-                    //     'Accept': 'application/json',
-                    //     'Content-Type': 'application/json'
-                    // },
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
                     body: body,
                 });
                 const responseJSON = await response.json() as ConfessionResponse;
