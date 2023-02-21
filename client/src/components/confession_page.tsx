@@ -80,7 +80,7 @@ export const Confession : React.FC = () => {
             <p>However, if you're just having a hard day and need to vent then 
                 you're welcome to contact us here too. Up to ypu!</p>
             <form onSubmit={handleSubmit}>
-                <SubjectInput handleChange={handleSubjectChange} />
+                <SubjectInput inputValue={subject} handleChange={handleSubjectChange} />
                 {errors.subject && <p>Error: You must enter a subject</p>}
                 <ReasonsSelect selectedReason={reason} handleChange={handleReasonChange} />
                 {errors.reason && <p>Error: You must select a reason from the dropdown</p>}
