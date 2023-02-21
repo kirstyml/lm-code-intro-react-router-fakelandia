@@ -82,7 +82,7 @@ export const Confession : React.FC = () => {
             <form onSubmit={handleSubmit}>
                 <SubjectInput handleChange={handleSubjectChange} />
                 {errors.subject && <p>Error: You must enter a subject</p>}
-                <ReasonsSelect handleChange={handleReasonChange} />
+                <ReasonsSelect selectedReason={reason} handleChange={handleReasonChange} />
                 {errors.reason && <p>Error: You must select a reason from the dropdown</p>}
                 <textarea name="details" id="" cols={30} rows={10} onChange={(event) => handleDetailsChange(event)}></textarea>
                 {errors.details && <p>Error: You must enter at least 20 characters in the details section</p>}
