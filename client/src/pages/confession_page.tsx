@@ -96,7 +96,7 @@ export const Confession: React.FC = () => {
                 <ReasonsSelect selectedReason={reason} handleChange={handleReasonChange} />
                 {inputErrors.reason && <p>Error: You must select a reason from the dropdown</p>}
                 <DetailsTextArea detailsText={details} handleChange={handleDetailsChange} />
-                {inputErrors.details && <p>Error: You must enter at least 20 characters in the details sdiv</p>}
+                {inputErrors.details && <p>Error: You must enter at least 20 characters in the details section</p>}
                 <input type="submit" value="Confess" disabled={!allValid} />
                 {submitError && <p>Error: The confession has not been submitted. Details: {submitError} </p>}
             </form>
