@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from "react-router-dom";
 import SiteRouter from './router'
@@ -12,7 +12,7 @@ it("navigates to the home page when home is clicked", async () => {
 it("navigates to the misdemeanours page when misdemeanours is clicked", async () => {
     render(<MemoryRouter initialEntries={['/confess']}><SiteRouter /></MemoryRouter>)
     await userEvent.click(screen.getByText("Misdemeanours"));
-    expect(screen.getByText("Citizen ID")).toBeInTheDocument();
+    expect(screen.getByText("Loading Misdemeanours....")).toBeInTheDocument();
 });
 
 it("navigates to the confession page when confession is clicked", async () => {

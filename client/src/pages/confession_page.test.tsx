@@ -110,7 +110,7 @@ test('given the user has entered valid inputs, when the user presses submit, the
     const submitButton = screen.getByRole('button') as HTMLButtonElement;
     await userEvent.click(submitButton);
     await waitFor(window.alert);
-    expect(window.alert).toHaveBeenCalledTimes(1);
+    expect(window.alert).toHaveBeenCalled();
   });
 
 

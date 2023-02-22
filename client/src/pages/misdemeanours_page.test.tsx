@@ -52,10 +52,11 @@ beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
-test('renders the table headings', () => {
-    render(<Misdemeanours />);
-    const tableHeader = screen.getByText(/Citizen ID/i);
-    expect(tableHeader).toBeInTheDocument();
+test('renders the table headings', async () => {
+  render(<MisdemeanoursProvider><Misdemeanours /></MisdemeanoursProvider>);
+  await waitFor(() => screen.findByText("vegetables"));
+  const tableHeader = screen.getByText(/Citizen ID/i);
+  expect(tableHeader).toBeInTheDocument();
 });
 
 test('loads and displays the misdemeanours', async () => {
