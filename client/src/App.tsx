@@ -2,7 +2,7 @@ import { BrowserRouter } from "react-router-dom";
 import SiteRouter from "./router";
 import { MisdemeanoursProvider } from "./context/misdemeanour_provider";
 
-import './App.css'
+import './App.scss'
 
 function App() {
   return (
