@@ -2,7 +2,12 @@ import { Misdemeanour } from '../types/misdemeanours.types';
 import { Punishment } from '../types/punishment.types';
 import { MisdemeanourItem } from './misdemeanour';
 
-export const MisdemeanoursContainer: React.FC<{ misdemeanours: Misdemeanour[], punishments: Punishment[] }> = ({ misdemeanours, punishments }) => {
+interface IMisdemeanoursContainer {
+    misdemeanours: Misdemeanour[], 
+    punishments: Punishment[]
+}
+
+export const MisdemeanoursContainer: React.FC<{ misdemeanours: Misdemeanour[], punishments: Punishment[] }> = ({ misdemeanours, punishments } : IMisdemeanoursContainer) => {
     return (
         <div className="misdemeanour_container">
             <div className="misdemeanour_container--headings misdemeanour">

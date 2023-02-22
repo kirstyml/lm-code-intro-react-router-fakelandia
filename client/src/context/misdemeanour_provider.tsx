@@ -9,7 +9,11 @@ interface IMisdemeanoursContext {
     misdemeanoursLoading: boolean
 }
 
-export const MisdemeanoursContext = React.createContext<IMisdemeanoursContext>({ misdemeanours: [], punishments: [], addMisdemeanour: () => {}, misdemeanoursLoading: true});
+const defaultFunction = () => {
+    //empty function
+}
+
+export const MisdemeanoursContext = React.createContext<IMisdemeanoursContext>({ misdemeanours: [], punishments: [], addMisdemeanour: defaultFunction, misdemeanoursLoading: true});
 
 export const useMisdemeanours = () => {
     const { misdemeanours } = useContext(MisdemeanoursContext);

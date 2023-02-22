@@ -86,10 +86,10 @@ export const Confession: React.FC = () => {
 
     return (
         <div>
-            <p>It's very difficult to catch people committing misdemeanours
+            <p>It&apos;s very difficult to catch people committing misdemeanours
                 so we appreciate it when citizens confess to us directly.</p>
-            <p>However, if you're just having a hard day and need to vent then
-                you're welcome to contact us here too. Up to ypu!</p>
+            <p>However, if you&apos;re just having a hard day and need to vent then
+                you&apos;re welcome to contact us here too. Up to ypu!</p>
             <form onSubmit={handleSubmit}>
                 <SubjectInput inputValue={subject} handleChange={handleSubjectChange} />
                 {inputErrors.subject && <p>Error: You must enter a subject</p>}

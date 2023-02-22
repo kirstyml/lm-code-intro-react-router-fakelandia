@@ -3,7 +3,7 @@ interface ISubjectInput {
     handleChange : (event : React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const SubjectInput : React.FC<ISubjectInput> = ({ inputValue, handleChange }) => {
+export const SubjectInput : React.FC<ISubjectInput> = ({ inputValue, handleChange } : ISubjectInput) => {
     return (
         <>
             <label htmlFor="subject">Subject</label>

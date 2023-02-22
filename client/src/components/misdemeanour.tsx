@@ -1,7 +1,12 @@
-import { Misdemeanour } from "../types/misdemeanours.types"
-import { Punishment } from "../types/punishment.types"
+import { Misdemeanour } from "../types/misdemeanours.types";
+import { Punishment } from "../types/punishment.types";
 
-export const MisdemeanourItem : React.FC<{ misdemeanour: Misdemeanour, punishment: Punishment}> = ({ misdemeanour, punishment }) => {
+interface IMisdemeanourItem {
+    misdemeanour: Misdemeanour,
+    punishment: Punishment
+}
+
+export const MisdemeanourItem : React.FC<IMisdemeanourItem> = ({ misdemeanour , punishment } : IMisdemeanourItem) => {
     return(
         <div className="misdemeanour">
             <p className="misdemeanour__id">{misdemeanour.citizenId}</p>
