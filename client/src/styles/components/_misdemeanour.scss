@@ -25,27 +25,6 @@
     display: none;
   }
 
-// /* 2 Column Card Layout */
-// @media screen and (max-width: 736px) {
-//   .misdemeanour {
-//       display: grid;
-//       grid-template-columns: 1fr 1fr;
-//       grid-gap: 20px;
-//   }
-// }
-/* 1 Column Card Layout */
-// @media screen and (max-width:$screen-small) {
-//   .misdemeanour {
-//       display: flex;
-//       flex-direction: column;
-//       border: 2px solid;
-//       margin-bottom: 20px;
-//   }
-//   .misdemeanour__item-heading {
-//     display: inline;
-//     font-weight: bold;
-//   }
-// }
 
 @media screen and (max-width:$screen-small) {
   .misdemeanour {
