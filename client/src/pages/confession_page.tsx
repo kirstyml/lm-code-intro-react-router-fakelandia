@@ -76,13 +76,13 @@ export const Confession: React.FC = () => {
             <p>It&apos;s very difficult to catch people committing misdemeanours
                 so we appreciate it when citizens confess to us directly.</p>
             <p>However, if you&apos;re just having a hard day and need to vent then
-                you&apos;re welcome to contact us here too. Up to ypu!</p>
-            <form onSubmit={handleSubmit}>
+                you&apos;re welcome to contact us here too. Up to you!</p>
+            <form onSubmit={handleSubmit} className="confession-form">
                 <SubjectInput inputValue={confessionData.subject} handleChange={onChangeHandler} error={subjectError} />
                 <ReasonsSelect selectedReason={confessionData.reason} handleChange={onChangeHandler} error={reasonError} />
                 <DetailsTextArea detailsText={confessionData.details} handleChange={onChangeHandler} error={detailsError}/>
-                <input type="submit" value="Confess" disabled={!allValid} />
-                {submitError && <p>Error: The confession has not been submitted. Details: {submitError} </p>}
+                <input type="submit" value="Confess" disabled={!allValid} className="confession-form__submit" />
+                {submitError && <p className="confession-form__error">Error: The confession has not been submitted. Details: {submitError} </p>}
             </form>
         </div>
     )

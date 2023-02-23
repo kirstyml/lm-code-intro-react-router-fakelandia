@@ -11,9 +11,9 @@ export const DetailsTextArea: React.FC<IDetailsTextArea> = ({ detailsText, handl
     const [touched, setTouched] = useState<boolean>(false);
 
     return (
-        <>
-            <textarea name="details" id="details" cols={30} rows={10} onChange={(event) => { setTouched(true); handleChange(event.target.value, "details") }} value={detailsText}></textarea>
-            {error && touched && <p>Error: Details {error}</p>}
-        </>
+        <div className="confession-form__question">
+            <textarea name="details" id="details" cols={30} rows={10} onChange={(event) => { setTouched(true); handleChange(event.target.value, "details") }} value={detailsText} className="confession-form__field"></textarea>
+            {error && touched && <p className="confession-form__error">Error: Details {error}</p>}
+        </div>
     )
 }
