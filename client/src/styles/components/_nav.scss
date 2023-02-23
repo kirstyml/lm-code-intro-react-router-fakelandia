@@ -1,0 +1,35 @@
+.nav-bar {
+    flex: 1 1 0;
+    display: flex;
+  }
+  
+  .nav-bar__links {
+    list-style: none;
+    width: 100%;
+    display: flex;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .nav-bar__link {
+    margin: 0 1rem;
+    flex: 1 1 0;
+    text-align: center;
+    font-size: $large;
+    color: white;
+    text-decoration: none;
+  }
+
+  .nav-bar__link-text--active {
+    color: $gold;
+  }
+
+  .nav-bar__link-text:visited {
+    color: white;
+  }
+
+  .nav-bar__link-text:hover {
+    color: $gold;
+  }
+
+ 

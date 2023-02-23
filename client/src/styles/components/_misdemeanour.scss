@@ -1,0 +1,20 @@
+.misdemeanour {
+    display: grid;
+    grid-template-columns: 20px repeat(4, 1fr) 20px;
+  }
+  
+  .misdemeanour__id {
+    grid-column-start: 2;
+  }
+  
+  .misdemeanour__misdemeanour {
+    grid-column-start: 4;
+  }
+  
+  .misdemeanour__date {
+    grid-column-start: 3;
+  }
+  
+  .misdemeanour__punishment {
+    grid-column-start: 5;
+  }

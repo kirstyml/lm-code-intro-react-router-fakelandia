@@ -1,0 +1,35 @@
+.header {
+    width: 100%;
+    height: 8rem;
+    padding: 16px 32px;
+    position: fixed;
+    background-color: $blue;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header__container {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.header__logo-title {
+    font-family: $title-font-family;
+    color: $gold;
+    font-size: $small;
+    width: 6rem;
+    text-align: left;
+    margin: 0;
+    margin-left: 16px;
+    margin-right: 32px;
+}
+
+.header__logo {
+    display: flex;
+}

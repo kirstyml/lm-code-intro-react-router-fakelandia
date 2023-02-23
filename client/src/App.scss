@@ -1,4 +1,10 @@
-@import "./styles/_variables.scss";
+@import "./styles/variables.scss";
+@import "./styles/components/misdemeanour.scss";
+@import "./styles/components/header.scss";
+@import "./styles/components/nav.scss";
+@import "./styles/components/misdemeanour_container";
+@import "./styles/components/footer";
+@import "./styles/layout";
 
 #root {
   /* max-width: 1280px; */
@@ -16,87 +22,47 @@ main {
   padding-top: 10rem;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 8rem;
-  padding: 1rem 2rem;
-  position: fixed;
-  background-color: white;
+// .active {
+//   color: red;
+// }
+
+:root {
+  font-family: $body-font-family;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
 }
 
-.header__site-title {
-  font-size: $title-text;
-  width: 10rem;
-  text-align: left;
+a {
+  font-weight: 500;
+  text-decoration: inherit;
+}
+
+body {
   margin: 0;
-  margin-right: 2rem;
-}
-
-.nav-bar {
-  flex: 1 1 0;
   display: flex;
+  min-width: 320px;
+  min-height: 100vh;
 }
 
-.nav-bar__links {
-  list-style: none;
-  width: 100%;
-  display: flex;
-  padding: 0;
-  margin: 0;
-}
-
-.nav-bar__link {
-  margin: 0 1rem;
-  flex: 1 1 0;
-  text-align: center;
-  font-size: 2rem;
-  text-decoration: none;
-}
-
-.footer {
-  height: 100px;
-  background-color: grey;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.active {
-  color: red;
-}
-
-.misdemeanour_container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 80vw;
-}
-
-.misdemeanour {
-  display: grid;
-  grid-template-columns: 20px repeat(4, 1fr) 20px;
-}
-
-.misdemeanour__id {
-  grid-column-start: 2;
-}
-
-.misdemeanour__misdemeanour {
-  grid-column-start: 4;
-}
-
-.misdemeanour__date {
-  grid-column-start: 3;
-}
-
-.misdemeanour__punishment {
-  grid-column-start: 5;
-}
-
-.misdemeanour_container--headings {
-  font-weight: bold;
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  // a:hover {
+  //   color: #747bff;
+  // }
+  button {
+    background-color: #f9f9f9;
+  }
 }
