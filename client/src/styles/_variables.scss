@@ -8,10 +8,15 @@ $title-font-family: 'Source Serif Pro', serif;
 $body-font-family: 'Public Sans', sans-serif;
 
 //Font Size
-$largest: 1.75rem;
-$large: 1.5rem;
-$regular: 1rem;
-$small: 0.875rem;
+$font-largest: 1.75rem;
+$font-large: 1.5rem;
+$font-regular: 1rem;
+$font-small: 0.875rem;
 
 //Layout
-$max-width: 1280px;
+$max-width: 960px;
+
+//Breakpoints
+$screen-smallest: 360px;
+$screen-small: 580px;
+$screen-regular: 768px;

@@ -1,10 +1,19 @@
 .misdemeanour_container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 80vw;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 80vw;
+}
+
+.misdemeanour_container--headings {
+  font-weight: bold;
+  background-color: $blue;
+  color: white;
+  padding: 0 16px;
+}
+
+@media screen and (max-width:$screen-small) {
   .misdemeanour_container--headings {
-    font-weight: bold;
+    display: none;
   }
+}

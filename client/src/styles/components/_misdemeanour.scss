@@ -1,20 +1,73 @@
 .misdemeanour {
     display: grid;
-    grid-template-columns: 20px repeat(4, 1fr) 20px;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 8px 16px;
   }
   
   .misdemeanour__id {
-    grid-column-start: 2;
+    grid-column-start: 1;
   }
   
   .misdemeanour__misdemeanour {
-    grid-column-start: 4;
-  }
-  
-  .misdemeanour__date {
     grid-column-start: 3;
   }
   
-  .misdemeanour__punishment {
-    grid-column-start: 5;
+  .misdemeanour__date {
+    grid-column-start: 2;
   }
+  
+  .misdemeanour__punishment {
+    grid-column-start: 4;
+    text-align: center;
+  }
+
+  .misdemeanour__item-heading {
+    display: none;
+  }
+
+// /* 2 Column Card Layout */
+// @media screen and (max-width: 736px) {
+//   .misdemeanour {
+//       display: grid;
+//       grid-template-columns: 1fr 1fr;
+//       grid-gap: 20px;
+//   }
+// }
+/* 1 Column Card Layout */
+// @media screen and (max-width:$screen-small) {
+//   .misdemeanour {
+//       display: flex;
+//       flex-direction: column;
+//       border: 2px solid;
+//       margin-bottom: 20px;
+//   }
+//   .misdemeanour__item-heading {
+//     display: inline;
+//     font-weight: bold;
+//   }
+// }
+
+@media screen and (max-width:$screen-small) {
+  .misdemeanour {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      border: 2px solid;
+      margin-bottom: 20px;
+  }
+  .misdemeanour__item-heading {
+    display: inline;
+    font-weight: bold;
+    grid-column-start: 1;
+    margin: 0.5em 0;
+    font-size: $font-regular;
+  }
+  .misdemeanour__id, .misdemeanour__date, .misdemeanour__misdemeanour, .misdemeanour__punishment {
+    grid-column-start: 2;
+    text-align: right;
+    margin: 0.5em 0;
+  }
+
+  .misdemeanour__punishment {
+    float: right;
+  }
+}

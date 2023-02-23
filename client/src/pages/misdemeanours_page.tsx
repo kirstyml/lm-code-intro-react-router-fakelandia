@@ -8,6 +8,7 @@ export const Misdemeanours : React.FC = () => {
 
     return (
         <div>
+            <h2>Misdemeanours</h2>
             {misdemeanoursLoading && <p>Loading Misdemeanours....</p>}
             {!misdemeanoursLoading && misdemeanours && <MisdemeanoursContainer misdemeanours={misdemeanours} punishments={punishments} />}
             {!misdemeanoursLoading && !misdemeanours && <p>Error: Something went wrong loading the data. Please check your connection and reload the app</p>}

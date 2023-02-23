@@ -7,15 +7,15 @@
     list-style: none;
     width: 100%;
     display: flex;
+    justify-content: flex-end;
     padding: 0;
     margin: 0;
   }
   
   .nav-bar__link {
     margin: 0 1rem;
-    flex: 1 1 0;
     text-align: center;
-    font-size: $large;
+    font-size: $font-regular;
     color: white;
     text-decoration: none;
   }
@@ -31,5 +31,9 @@
   .nav-bar__link-text:hover {
     color: $gold;
   }
+
+//   @media screen (max-width: 768px) {
+    
+//   }
 
  
