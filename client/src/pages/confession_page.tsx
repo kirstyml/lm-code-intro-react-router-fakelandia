@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { ConfessionData, ConfessionResponse, ConfessionChangeHandler } from "../types/confession.types";
-import { reasons, reasonOptions } from "../types/reasons.types";
 import { useAddMisdemeanour } from "../context/misdemeanour_provider";
 import { ReasonsSelect } from "../components/reasonsSelect";
 import { SubjectInput } from "../components/subjectInput";
 import { DetailsTextArea } from "../components/detailsTextArea";
+import { detailsValidation, reasonValidation, subjectValidation } from "../validation/confession_validation";
 
 const defaultConfessionData : ConfessionData = {
     subject: "",
@@ -14,7 +14,6 @@ const defaultConfessionData : ConfessionData = {
 
 export const Confession: React.FC = () => {
     const [confessionData, setConfessionData] = useState<ConfessionData>(defaultConfessionData)
-    const [inputErrors, setInputErrors] = useState({ subject: false, reason: false, details: false });
     const [submitError, setSubmitError] = useState<string | undefined>(undefined);
 
     const updateMisdemeanours = useAddMisdemeanour();
@@ -29,7 +28,11 @@ export const Confession: React.FC = () => {
         setConfessionData(newData);
     };
 
-    const allValid = confessionData.subject && confessionData.reason && confessionData.details.length > 20;
+    // const allValid = confessionData.subject && confessionData.reason && confessionData.details.length > 20;
+    const subjectError = subjectValidation(confessionData.subject);
+    const reasonError = reasonValidation(confessionData.reason);
+    const detailsError = detailsValidation(confessionData.details);
+    const allValid = !subjectError && !reasonError && !detailsError;
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -75,12 +78,9 @@ export const Confession: React.FC = () => {
             <p>However, if you&apos;re just having a hard day and need to vent then
                 you&apos;re welcome to contact us here too. Up to ypu!</p>
             <form onSubmit={handleSubmit}>
-                <SubjectInput inputValue={confessionData.subject} handleChange={onChangeHandler} />
-                {inputErrors.subject && <p>Error: You must enter a subject</p>}
-                <ReasonsSelect selectedReason={confessionData.reason} handleChange={onChangeHandler} />
-                {inputErrors.reason && <p>Error: You must select a reason from the dropdown</p>}
-                <DetailsTextArea detailsText={confessionData.details} handleChange={onChangeHandler} />
-                {inputErrors.details && <p>Error: You must enter at least 20 characters in the details section</p>}
+                <SubjectInput inputValue={confessionData.subject} handleChange={onChangeHandler} error={subjectError} />
+                <ReasonsSelect selectedReason={confessionData.reason} handleChange={onChangeHandler} error={reasonError} />
+                <DetailsTextArea detailsText={confessionData.details} handleChange={onChangeHandler} error={detailsError}/>
                 <input type="submit" value="Confess" disabled={!allValid} />
                 {submitError && <p>Error: The confession has not been submitted. Details: {submitError} </p>}
             </form>

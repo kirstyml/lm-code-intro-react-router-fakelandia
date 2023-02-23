@@ -5,7 +5,7 @@ import { ReasonsSelect } from './reasonsSelect';
 describe("<ReasonsSelect />", () => {
   test('given the required props, when the component is rendered, it displays the value', async () => {
     const handleChange = jest.fn(x => x);
-    render(<ReasonsSelect selectedReason={""} handleChange={handleChange} />);
+    render(<ReasonsSelect selectedReason={""} handleChange={handleChange} error={undefined} />);
     const select = screen.getByRole('combobox');
     expect(select).toBeInTheDocument();
     expect((screen.getByText("--Please select an option--") as HTMLOptionElement).selected).toBe(true);
@@ -14,7 +14,7 @@ describe("<ReasonsSelect />", () => {
 
   test('given the select has rendered, when a user selects an option, then the handleChange function is called', async () => {
     const handleChange = jest.fn(x => x);
-    render(<ReasonsSelect selectedReason={""} handleChange={handleChange} />);
+    render(<ReasonsSelect selectedReason={""} handleChange={handleChange} error={undefined} />);
     const select = screen.getByRole('combobox');
     await userEvent.selectOptions(select, ['vegetables']);
     expect(handleChange).toHaveBeenCalledTimes(1);

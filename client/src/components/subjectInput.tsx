@@ -1,15 +1,19 @@
+import { useState } from "react";
 import { ConfessionChangeHandler } from "../types/confession.types"
 
 interface ISubjectInput {
     inputValue : string,
-    handleChange : ConfessionChangeHandler
+    handleChange : ConfessionChangeHandler,
+    error: undefined | string
 }
 
-export const SubjectInput : React.FC<ISubjectInput> = ({ inputValue, handleChange } : ISubjectInput) => {
+export const SubjectInput : React.FC<ISubjectInput> = ({ inputValue, handleChange, error } : ISubjectInput) => {
+    const [touched, setTouched] = useState<boolean>(false);
     return (
         <>
             <label htmlFor="subject">Subject</label>
-            <input name="subject" id="subject" type="text" onChange={(e) => handleChange(e.target.value, "subject")} value={inputValue} />
+            <input name="subject" id="subject" type="text" onChange={(e) => {setTouched(true); handleChange(e.target.value, "subject")}} value={inputValue} />
+            {error && touched && <p>Error: Subject {error}</p>}
         </>
     )
 }
