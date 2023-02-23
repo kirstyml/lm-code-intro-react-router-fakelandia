@@ -53,8 +53,8 @@ describe("<MisdemeanoursPage />", () => {
   test('renders the table headings', async () => {
     render(<MisdemeanoursProvider><Misdemeanours /></MisdemeanoursProvider>);
     await waitFor(() => screen.findByText("vegetables"));
-    const tableHeader = screen.getByText(/Citizen ID/i);
-    expect(tableHeader).toBeInTheDocument();
+    const tableHeader = screen.getAllByText(/Citizen ID/i);
+    expect(tableHeader.length >= 1).toBe(true);
   });
 
   test('loads and displays the misdemeanours', async () => {
