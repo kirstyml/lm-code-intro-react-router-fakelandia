@@ -43,12 +43,12 @@
 
   .nav-bar__links--expanded {
     position: absolute;
-    top: 6rem;
+    top: $header-height;
     left: 0;
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: calc(100vh - 6rem);
+    height: calc(100vh - $header-height);
     background-color: $blue;
     opacity: 0.8;
     align-items: center;

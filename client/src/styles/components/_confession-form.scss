@@ -19,6 +19,11 @@
 .confession-form__field {
     font-family: $body-font-family;
     font-size: $font-regular;
+    outline: $blue solid 1px;
+}
+
+.confession-form__field:focus {
+    outline: $gold solid 3px;
 }
 
 .confession-form__error {
