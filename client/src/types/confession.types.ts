@@ -6,6 +6,12 @@ export interface ConfessionData {
     details: string
 }
 
+export interface InputTouched {
+    subject: boolean,
+    reason: boolean,
+    details: boolean
+}
+
 export type ConfessionChangeHandler = <TKey extends keyof ConfessionData>(
 	value: ConfessionData[TKey],
 	name: TKey
