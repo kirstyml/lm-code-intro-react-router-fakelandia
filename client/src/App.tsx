@@ -2,7 +2,7 @@ import { BrowserRouter } from "react-router-dom";
 import SiteRouter from "./router";
 import { MisdemeanoursProvider } from "./context/misdemeanour_provider";
 
-import './App.scss'
+import "./App.scss";
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
         </BrowserRouter>
       </MisdemeanoursProvider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

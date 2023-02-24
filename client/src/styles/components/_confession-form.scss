@@ -1,46 +1,46 @@
 .confession-form {
-    display: flex;
-    flex-direction: column;
-    max-width: 600px;
-    margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .confession-form__label {
-    font-family: $title-font-family;
-    font-size: $font-large;
+  font-family: $title-font-family;
+  font-size: $font-large;
 }
 
 .confession-form__question {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1.875rem;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.875rem;
 }
 
 .confession-form__field {
-    font-family: $body-font-family;
-    font-size: $font-regular;
-    &--valid {
-        outline: $blue solid 1px;
-        &:focus {
-            outline: $gold solid 3px;
-        }
+  font-family: $body-font-family;
+  font-size: $font-regular;
+  &--valid {
+    outline: $blue solid 1px;
+    &:focus {
+      outline: $gold solid 3px;
     }
-    &--error {
-        outline: $red solid 1px;
-        &:focus {
-            outline: $gold solid 3px;
-        }
+  }
+  &--error {
+    outline: $red solid 1px;
+    &:focus {
+      outline: $gold solid 3px;
     }
+  }
 }
 
 .confession-form__error {
-    color: $red;
-    font-size: $font-small;
+  color: $red;
+  font-size: $font-small;
 }
 
 .confession-form__submit {
-    background-color: $gold;
-    color: $blue;
-    font-family: $body-font-family;
-    font-size: $font-large;
+  background-color: $gold;
+  color: $blue;
+  font-family: $body-font-family;
+  font-size: $font-large;
 }
