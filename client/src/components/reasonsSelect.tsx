@@ -13,7 +13,7 @@ export const ReasonsSelect : React.FC<IReasonsSelect> = ({ selectedReason, handl
     return (
         <div className="confession-form__question">
             <label htmlFor="reason" className="confession-form__label">Reason for contact</label>
-            <select name="reason" id="reason" value={selectedReason} onChange={(e) => handleChange(e.target.value as reasonOptions, "reason")} className="confession-form__field">
+            <select name="reason" id="reason" value={selectedReason} onChange={(e) => handleChange(e.target.value as reasonOptions, "reason")} className={`confession-form__field${touched && error ? "--error" : "--valid"}`}>
                 {reasons.map(reason => <option key={reason} value={reason}>{
                     reason === "" ? "--Please select an option--" : reason === "just-talk" ? "I just want to talk" : reason
                 }</option>)}
