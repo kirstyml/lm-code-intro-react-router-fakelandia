@@ -7,7 +7,6 @@ export function usePunishments(misdemeanours : Misdemeanour[]) {
 
     useEffect(() => {
       if(misdemeanours) {
-        const url = `https://picsum.photos/v2/list?page=1&limit=${misdemeanours.length}`
         getPunishments(misdemeanours.length);
       }
     }, [misdemeanours]);
