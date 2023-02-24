@@ -2,8 +2,8 @@ import { MisdemeanoursContainer } from "../components/misdemeanours_container";
 import {
   useMisdemeanours,
   useMisdemeanoursLoading,
-  usePunishments,
 } from "../context/misdemeanour_provider";
+import { usePunishments } from "../context/punishment_provider";
 
 export const Misdemeanours: React.FC = () => {
   const misdemeanours = useMisdemeanours();
