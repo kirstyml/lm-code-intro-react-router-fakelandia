@@ -45,8 +45,8 @@ export const MisdemeanoursProvider: React.FC<{
   const [misdemeanoursLoading, setMisdemeanoursLoading] =
     useState<boolean>(true);
 
-  // TODO: decide how amount is specified
-  const amount = 10;
+  // amount of misdemeanours random max 100 set when app loads
+  const amount = Math.floor(Math.random() * 100);
 
   useEffect(() => {
     getMisdemeanours(amount);
