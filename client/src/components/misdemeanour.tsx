@@ -8,7 +8,7 @@ interface IMisdemeanourItem {
 
 export const MisdemeanourItem : React.FC<IMisdemeanourItem> = ({ misdemeanour , punishment } : IMisdemeanourItem) => {
     return(
-        <div className="misdemeanour">
+        <div className={`misdemeanour ${misdemeanour.citizenId === "YOU!" ? "misdemeanour--yours" : ""}`}>
             <h3 className="misdemeanour__item-heading">Citizen ID</h3>
             <p className="misdemeanour__id">{misdemeanour.citizenId}</p>
             <h3 className="misdemeanour__item-heading">Date</h3>
