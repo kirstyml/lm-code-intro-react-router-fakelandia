@@ -25,7 +25,7 @@ export const Misdemeanours: React.FC = () => {
           punishments={punishments}
         />
       )}
-      {status !== 200 && status !== 201 && (
+      {misdemeanourStatus !== 200 && misdemeanourStatus !== 201 && (
         <p>
           Error: Something went wrong loading the data. Please check your
           connection and reload the app
