@@ -9,12 +9,7 @@ const SiteRouter: React.FC = () => (
   <Routes>
     <Route path="/" element={<MainLayout />}>
       <Route index element={<Home />} />
-      <Route
-        path="/misdemeanours"
-        element={
-            <Misdemeanours />
-        }
-      />
+      <Route path="/misdemeanours" element={<Misdemeanours />} />
       <Route path="/confession" element={<Confession />} />
       <Route path="*" element={<NotFound />} />
     </Route>

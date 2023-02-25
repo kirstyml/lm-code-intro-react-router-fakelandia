@@ -4,11 +4,6 @@ export function isError(e: unknown): e is Error {
   return (e as Error).message !== undefined;
 }
 
-// export interface FetchOptions {
-//   method: string,
-//   body: string
-// }
-
 export function useFetchData<TResponse>(url: string) {
   const [data, setData] = useState<TResponse>();
   const [isFetching, setIsFetching] = useState(true);

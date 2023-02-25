@@ -19,9 +19,12 @@ export type Misdemeanour = {
 };
 
 export interface MisdemeanourResponse {
-  misdemeanours: Misdemeanour[]
+  misdemeanours: Misdemeanour[];
 }
 
 export function isSuccessResponse(data: unknown): data is MisdemeanourResponse {
-  return data !== undefined && (data as MisdemeanourResponse).misdemeanours !== undefined;
+  return (
+    data !== undefined &&
+    (data as MisdemeanourResponse).misdemeanours !== undefined
+  );
 }

@@ -1,101 +1,18 @@
-import React, { useState } from "react";
-import {
-  ConfessionData,
-  ConfessionResponse,
-  ConfessionChangeHandler,
-  InputTouched,
-} from "../types/confession.types";
-import { useAddMisdemeanour } from "../context/misdemeanour_provider";
 import { ReasonsSelect } from "../components/reasonsSelect";
 import { SubjectInput } from "../components/subjectInput";
 import { DetailsTextArea } from "../components/detailsTextArea";
-import {
-  detailsValidation,
-  reasonValidation,
-  subjectValidation,
-} from "../validation/confession_validation";
-
-const defaultConfessionData: ConfessionData = {
-  subject: "",
-  reason: "",
-  details: "",
-};
-
-const defaultInputTouched: InputTouched = {
-  subject: false,
-  reason: false,
-  details: false,
-};
+import { useFormInput } from "../hooks/useFormData";
 
 export const Confession: React.FC = () => {
-  const [confessionData, setConfessionData] = useState<ConfessionData>(
-    defaultConfessionData
-  );
-  const [inputTouched, setInputTouched] = useState(defaultInputTouched);
-  const [submitError, setSubmitError] = useState<string | undefined>(undefined);
-
-  const onChangeHandler: ConfessionChangeHandler = (value, name) => {
-    const newInputTouched = { ...inputTouched };
-    newInputTouched[name] = true;
-    setInputTouched(newInputTouched);
-    const newData = { ...confessionData };
-    newData[name] = value;
-    setConfessionData(newData);
-  };
-
-  const subjectError = subjectValidation(confessionData.subject);
-  const reasonError = reasonValidation(confessionData.reason);
-  const detailsError = detailsValidation(confessionData.details);
-  const allValid = !subjectError && !reasonError && !detailsError;
-
-  // Handle submit and update data
-
-  const updateMisdemeanours = useAddMisdemeanour();
-
-  const resetForm = () => {
-    setConfessionData(defaultConfessionData);
-    setInputTouched(defaultInputTouched);
-  };
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (allValid) {
-      const body = JSON.stringify(confessionData);
-      try {
-        const response = await fetch(`http://localhost:8080/api/confess`, {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: body,
-        });
-        const responseJSON = (await response.json()) as ConfessionResponse;
-        if (responseJSON.success) {
-          if (
-            !responseJSON.justTalked &&
-            confessionData.reason !== "just-talk" &&
-            confessionData.reason !== ""
-          ) {
-            updateMisdemeanours(confessionData.reason);
-            alert("Your confession has been received.");
-            resetForm();
-          } else {
-            alert("Thanks for chatting - hope you feel better!");
-            resetForm();
-          }
-        } else {
-          setSubmitError(responseJSON.message);
-        }
-      } catch (error) {
-        if (typeof error === "string") {
-          setSubmitError(error);
-        } else if (error instanceof Error) {
-          setSubmitError(error.message);
-        }
-      }
-    }
-  };
+  const {
+    formData,
+    handleChange: onChangeHandler,
+    errors,
+    touched: inputTouched,
+    handleSubmit,
+    submitError,
+    allValid,
+  } = useFormInput();
 
   return (
     <div>
@@ -110,21 +27,21 @@ export const Confession: React.FC = () => {
       </p>
       <form onSubmit={handleSubmit} className="confession-form">
         <SubjectInput
-          inputValue={confessionData.subject}
+          inputValue={formData.subject}
           handleChange={onChangeHandler}
-          error={subjectError}
+          error={errors.subject}
           touched={inputTouched.subject}
         />
         <ReasonsSelect
-          selectedReason={confessionData.reason}
+          selectedReason={formData.reason}
           handleChange={onChangeHandler}
-          error={reasonError}
+          error={errors.reason}
           touched={inputTouched.reason}
         />
         <DetailsTextArea
-          detailsText={confessionData.details}
+          detailsText={formData.details}
           handleChange={onChangeHandler}
-          error={detailsError}
+          error={errors.details}
           touched={inputTouched.details}
         />
         <input

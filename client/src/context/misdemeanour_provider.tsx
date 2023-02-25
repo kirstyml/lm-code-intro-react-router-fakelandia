@@ -12,7 +12,7 @@ interface IMisdemeanoursContext {
   addMisdemeanour: (misdemeanour: MisdemeanourKind) => void;
   misdemeanoursLoading: boolean;
   misdemeanourStatus: number | undefined;
-  misdemeanourError: string
+  misdemeanourError: string;
 }
 
 const defaultFunction = () => {
@@ -24,7 +24,7 @@ export const MisdemeanoursContext = React.createContext<IMisdemeanoursContext>({
   addMisdemeanour: defaultFunction,
   misdemeanoursLoading: true,
   misdemeanourStatus: undefined,
-  misdemeanourError: ""
+  misdemeanourError: "",
 });
 
 export const useMisdemeanours = () => {
@@ -43,16 +43,21 @@ export const useMisdemeanoursLoading = () => {
 };
 
 export const useMisdemeanoursError = () => {
-  const { misdemeanourStatus, misdemeanourError } = useContext(MisdemeanoursContext);
+  const { misdemeanourStatus, misdemeanourError } =
+    useContext(MisdemeanoursContext);
   return { misdemeanourStatus, misdemeanourError };
 };
 
 export const MisdemeanoursProvider: React.FC<{
   children?: React.ReactNode;
 }> = ({ children }) => {
-  const { data, status, error, isFetching } = useFetchData(`http://localhost:8080/api/misdemeanours/20`);
+  const { data, status, error, isFetching } = useFetchData(
+    `http://localhost:8080/api/misdemeanours/20`
+  );
 
-  const misdemeanours : Misdemeanour[] | undefined = isSuccessResponse(data) ? data.misdemeanours : undefined;
+  const misdemeanours: Misdemeanour[] | undefined = isSuccessResponse(data)
+    ? data.misdemeanours
+    : undefined;
 
   const addMisdemeanour = (misdemeanour: MisdemeanourKind) => {
     const newMisdemeanour = {
@@ -60,19 +65,19 @@ export const MisdemeanoursProvider: React.FC<{
       misdemeanour: misdemeanour,
       date: new Date().toLocaleDateString(),
     };
-    if(misdemeanours) {
+    if (misdemeanours) {
       misdemeanours.push(newMisdemeanour);
     }
   };
 
   return (
-      <MisdemeanoursContext.Provider
+    <MisdemeanoursContext.Provider
       value={{
         misdemeanours,
         addMisdemeanour,
-        misdemeanoursLoading : isFetching,
-        misdemeanourStatus : status,
-        misdemeanourError : error
+        misdemeanoursLoading: isFetching,
+        misdemeanourStatus: status,
+        misdemeanourError: error,
       }}
     >
       {children}

@@ -12,8 +12,11 @@ export const Misdemeanours: React.FC = () => {
   const misdemeanoursLoading = useMisdemeanoursLoading();
   const { misdemeanourStatus, misdemeanourError } = useMisdemeanoursError();
   const numberOfMisdemeanours = misdemeanours ? misdemeanours.length : 0;
-  const { data, status } = useFetchData(`https://picsum.photos/v2/list?page=1&limit=${numberOfMisdemeanours}`);
-  const punishments = status !== 200 && status !== 201 ? [] : data as Punishment[];
+  const { data, status } = useFetchData(
+    `https://picsum.photos/v2/list?page=1&limit=${numberOfMisdemeanours}`
+  );
+  const punishments =
+    status !== 200 && status !== 201 ? [] : (data as Punishment[]);
 
   return (
     <div>
