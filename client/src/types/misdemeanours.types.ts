@@ -17,3 +17,11 @@ export type Misdemeanour = {
   misdemeanour: MisdemeanourKind;
   date: string; // we'll stringify this for easy sending via HTTP rather than storing the full Date object
 };
+
+export interface MisdemeanourResponse {
+  misdemeanours: Misdemeanour[]
+}
+
+export function isSuccessResponse(data: unknown): data is MisdemeanourResponse {
+  return data !== undefined && (data as MisdemeanourResponse).misdemeanours !== undefined;
+}

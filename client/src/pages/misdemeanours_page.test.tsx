@@ -5,7 +5,7 @@ import { Misdemeanours } from "./misdemeanours_page";
 import { MisdemeanoursProvider } from "../context/misdemeanour_provider";
 
 const handlers = [
-  rest.get(`http://localhost:8080/api/misdemeanours/10`, (req, res, ctx) => {
+  rest.get(`http://localhost:8080/api/misdemeanours/20`, (req, res, ctx) => {
     return res(
       ctx.json({
         misdemeanours: [
@@ -90,7 +90,7 @@ describe("<MisdemeanoursPage />", () => {
   test("handles 500 error for misdemeanours", async () => {
     server.use(
       rest.get(
-        "http://localhost:8080/api/misdemeanours/10",
+        "http://localhost:8080/api/misdemeanours/20",
         (req, res, ctx) => {
           return res(ctx.status(500));
         }

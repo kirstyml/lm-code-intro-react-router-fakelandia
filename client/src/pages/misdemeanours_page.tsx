@@ -1,14 +1,19 @@
 import { MisdemeanoursContainer } from "../components/misdemeanours_container";
 import {
   useMisdemeanours,
+  useMisdemeanoursError,
   useMisdemeanoursLoading,
 } from "../context/misdemeanour_provider";
-import { usePunishments } from "../hooks/usePunishments";
+import { useFetchData } from "../hooks/useFetchData";
+import { Punishment } from "../types/punishment.types";
 
 export const Misdemeanours: React.FC = () => {
   const misdemeanours = useMisdemeanours();
   const misdemeanoursLoading = useMisdemeanoursLoading();
-  const punishments = misdemeanours ? usePunishments(misdemeanours) : [];
+  const { misdemeanourStatus, misdemeanourError } = useMisdemeanoursError();
+  const numberOfMisdemeanours = misdemeanours ? misdemeanours.length : 0;
+  const { data, status } = useFetchData(`https://picsum.photos/v2/list?page=1&limit=${numberOfMisdemeanours}`);
+  const punishments = status !== 200 && status !== 201 ? [] : data as Punishment[];
 
   return (
     <div>
@@ -20,7 +25,7 @@ export const Misdemeanours: React.FC = () => {
           punishments={punishments}
         />
       )}
-      {!misdemeanoursLoading && !misdemeanours && (
+      {status !== 200 && status !== 201 && (
         <p>
           Error: Something went wrong loading the data. Please check your
           connection and reload the app

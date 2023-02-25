@@ -1,5 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
+import { useFetchData } from "../hooks/useFetchData";
 import {
+  isSuccessResponse,
   Misdemeanour,
   MisdemeanourKind,
   YourId,
@@ -9,6 +11,8 @@ interface IMisdemeanoursContext {
   misdemeanours: Misdemeanour[] | undefined;
   addMisdemeanour: (misdemeanour: MisdemeanourKind) => void;
   misdemeanoursLoading: boolean;
+  misdemeanourStatus: number | undefined;
+  misdemeanourError: string
 }
 
 const defaultFunction = () => {
@@ -19,6 +23,8 @@ export const MisdemeanoursContext = React.createContext<IMisdemeanoursContext>({
   misdemeanours: [],
   addMisdemeanour: defaultFunction,
   misdemeanoursLoading: true,
+  misdemeanourStatus: undefined,
+  misdemeanourError: ""
 });
 
 export const useMisdemeanours = () => {
@@ -36,42 +42,17 @@ export const useMisdemeanoursLoading = () => {
   return misdemeanoursLoading;
 };
 
+export const useMisdemeanoursError = () => {
+  const { misdemeanourStatus, misdemeanourError } = useContext(MisdemeanoursContext);
+  return { misdemeanourStatus, misdemeanourError };
+};
+
 export const MisdemeanoursProvider: React.FC<{
   children?: React.ReactNode;
 }> = ({ children }) => {
-  const [misdemeanours, setMisdemeanours] = useState<
-    Misdemeanour[] | undefined
-  >([]);
-  const [misdemeanoursLoading, setMisdemeanoursLoading] =
-    useState<boolean>(true);
+  const { data, status, error, isFetching } = useFetchData(`http://localhost:8080/api/misdemeanours/20`);
 
-  // amount of misdemeanours random max 100 set when app loads
-  const amount = Math.floor(Math.random() * 100);
-
-  useEffect(() => {
-    getMisdemeanours(amount);
-  }, []);
-
-  const getMisdemeanours = async (amount: number) => {
-    try {
-      const response = await fetch(
-        `http://localhost:8080/api/misdemeanours/${amount}`
-      );
-      if (response.status === 200 || response.status === 201) {
-        const responseJSON = await response.json();
-        setMisdemeanours(responseJSON.misdemeanours);
-        setMisdemeanoursLoading(false);
-      } else {
-        console.log(response);
-        setMisdemeanours(undefined);
-        setMisdemeanoursLoading(false);
-      }
-    } catch (error) {
-      console.log(error);
-      setMisdemeanours(undefined);
-      setMisdemeanoursLoading(false);
-    }
-  };
+  const misdemeanours : Misdemeanour[] | undefined = isSuccessResponse(data) ? data.misdemeanours : undefined;
 
   const addMisdemeanour = (misdemeanour: MisdemeanourKind) => {
     const newMisdemeanour = {
@@ -79,16 +60,19 @@ export const MisdemeanoursProvider: React.FC<{
       misdemeanour: misdemeanour,
       date: new Date().toLocaleDateString(),
     };
-    console.log(newMisdemeanour);
-    misdemeanours && setMisdemeanours([...misdemeanours, newMisdemeanour]);
+    if(misdemeanours) {
+      misdemeanours.push(newMisdemeanour);
+    }
   };
 
   return (
-    <MisdemeanoursContext.Provider
+      <MisdemeanoursContext.Provider
       value={{
         misdemeanours,
         addMisdemeanour,
-        misdemeanoursLoading,
+        misdemeanoursLoading : isFetching,
+        misdemeanourStatus : status,
+        misdemeanourError : error
       }}
     >
       {children}
