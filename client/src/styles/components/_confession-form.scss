@@ -43,4 +43,7 @@
   color: $blue;
   font-family: $body-font-family;
   font-size: $font-large;
+  &:disabled {
+    background-color: grey;
+  }
 }
