@@ -10,7 +10,7 @@ import { Punishment } from "../types/punishment.types";
 export const Misdemeanours: React.FC = () => {
   const misdemeanours = useMisdemeanours();
   const misdemeanoursLoading = useMisdemeanoursLoading();
-  const { misdemeanourStatus, misdemeanourError } = useMisdemeanoursError();
+  const { misdemeanourStatus } = useMisdemeanoursError();
   const numberOfMisdemeanours = misdemeanours ? misdemeanours.length : 0;
   const { data, status } = useFetchData(
     `https://picsum.photos/v2/list?page=1&limit=${numberOfMisdemeanours}`
