@@ -7,6 +7,7 @@ import { MisdemeanoursProvider } from "../context/misdemeanour_provider";
 const handlers = [
   rest.get(`http://localhost:8080/api/misdemeanours/20`, (req, res, ctx) => {
     return res(
+      ctx.status(200),
       ctx.json({
         misdemeanours: [
           {
@@ -25,6 +26,7 @@ const handlers = [
   }),
   rest.get("https://picsum.photos/v2/list", (req, res, ctx) => {
     return res(
+      ctx.status(200),
       ctx.json([
         {
           id: "0",
@@ -59,7 +61,7 @@ describe("<MisdemeanoursPage />", () => {
         <Misdemeanours />
       </MisdemeanoursProvider>
     );
-    await waitFor(() => screen.findByText("vegetables"));
+    await waitFor(() => screen.findByText("Filter misdemeanours by type"));
     const tableHeader = screen.getAllByText(/Citizen ID/i);
     expect(tableHeader.length >= 1).toBe(true);
   });
@@ -70,8 +72,8 @@ describe("<MisdemeanoursPage />", () => {
         <Misdemeanours />
       </MisdemeanoursProvider>
     );
-    await waitFor(() => screen.findByText("vegetables"));
-    expect(screen.getByText("rudeness")).toBeInTheDocument();
+    await waitFor(() => screen.findByText("Filter misdemeanours by type"));
+    expect(screen.getAllByText("rudeness")[1]).toBeInTheDocument();
   });
 
   test("loads and display the punishment ideas", async () => {
@@ -80,7 +82,7 @@ describe("<MisdemeanoursPage />", () => {
         <Misdemeanours />
       </MisdemeanoursProvider>
     );
-    await waitFor(() => screen.findByText("vegetables"));
+    await waitFor(() => screen.findByText("Filter misdemeanours by type"));
     expect(screen.getAllByAltText("punishment idea")[0]).toHaveAttribute(
       "src",
       "https://picsum.photos/id/0/100"
@@ -118,7 +120,7 @@ describe("<MisdemeanoursPage />", () => {
         <Misdemeanours />
       </MisdemeanoursProvider>
     );
-    await waitFor(() => screen.findByText("vegetables"));
+    await waitFor(() => screen.findByText("Filter misdemeanours by type"));
     expect(screen.getAllByText("?")[0]).toBeInTheDocument();
   });
 });
