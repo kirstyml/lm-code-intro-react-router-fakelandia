@@ -1,4 +1,4 @@
-import { ReactComponent as Logo } from "../assets/Fakelandia.svg";
+import { ReactComponent as Logo } from "../assets/fakelandia.svg";
 
 export const Footer: React.FC = () => {
   return (

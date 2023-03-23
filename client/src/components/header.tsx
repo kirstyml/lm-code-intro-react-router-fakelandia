@@ -1,5 +1,5 @@
 import Nav from "./navigation";
-import { ReactComponent as Logo } from "../assets/Fakelandia.svg";
+import { ReactComponent as Logo } from "../assets/fakelandia.svg";
 
 export const Header: React.FC = () => {
   return (

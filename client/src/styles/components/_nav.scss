@@ -21,6 +21,10 @@
   text-decoration: none;
 }
 
+.nav-bar__link-text{
+  color: white;
+}
+
 .nav-bar__link-text--active {
   color: $gold;
 }
