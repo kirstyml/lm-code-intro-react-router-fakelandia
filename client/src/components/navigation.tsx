@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import React, { useState } from "react";
 import { ReactComponent as Menu } from "../assets/menu.svg";
+import { ReactComponent as Close } from "../assets/cross.svg";
 
 const Nav: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -8,7 +9,7 @@ const Nav: React.FC = () => {
   return (
     <nav className="nav-bar">
       <button className="nav-menu" onClick={() => setIsExpanded(!isExpanded)}>
-        <Menu height={40} width={40} />
+        {isExpanded ?  <Close height={40} width={40} /> : <Menu height={40} width={40} />}
       </button>
       <ul
         className={isExpanded ? "nav-bar__links--expanded" : "nav-bar__links"}
